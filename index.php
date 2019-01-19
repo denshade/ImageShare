@@ -11,34 +11,48 @@
 </head>
 <body>
 <div class="container">
+    <div class="py-5 text-center">
+        <h2>REDCap public image inventory</h2>
+        <p class="lead">Please use the underlying page to store your images.</p>
+    </div>
+    <div class="card">
+        <div class="card-body">
+        <h1>
+            Add a file
+        </h1>
+        <form class="form" action="upload.php" method="post" enctype="multipart/form-data">
+            Select an image to upload:
+            <div class="input-group">
+                <input class="" type="file" name="fileToUpload" id="fileToUpload">
+            </div>
+            <BR/>
+            <input class="btn btn-primary" type="submit" value="Upload Image" name="submit">
+        </form>
+        </div>
+    </div>
+    <BR/>
+    <div class="card">
+        <div class="card-body">
 
-    <H1>Available images</H1>
-    <table class="table">
-    <thead><tr><td>Image</td><td>URL</td></tr></thead>
-    <tbody><?php
-    $dir = new DirectoryIterator(dirname(__FILE__)."/images");
-    $urlPrefix = 'http://'.$_SERVER['HTTP_HOST'];
-    foreach ($dir as $fileinfo) {
-        if (!$fileinfo->isDot()) {
-            $filename = $fileinfo->getFilename();
-            $url = $urlPrefix."/showimage.php?file=$filename";
-            echo "<tr><td><img  style='
-                width:100%;
-                max-width:100px; max-height:100px;' src='$url'/></td>
-                <td><input type='text' readonly value='".$url."'/></td></tr>";
-        }
-    }
-    ?>
-    </tbody>
-    </table>
-    <h1>
-    Add a file
-    </h1>
-    <form class="form" action="upload.php" method="post" enctype="multipart/form-data">
-        Select image to upload:
-        <input class="form-control" type="file" name="fileToUpload" id="fileToUpload">
-        <input class="form-control" type="submit" value="Upload Image" name="submit">
-    </form>
+        <H1>Available images</H1>
+        <table class="table">
+            <thead><tr><td>Image</td><td>URL</td></tr></thead>
+            <tbody><?php
+            $dir = new DirectoryIterator(dirname(__FILE__)."/images");
+            $urlPrefix = 'http://'.$_SERVER['HTTP_HOST'];
+            foreach ($dir as $fileinfo) {
+                if (!$fileinfo->isDot()) {
+                    $filename = $fileinfo->getFilename();
+                    $url = $urlPrefix."/showimage.php?file=$filename";
+                    echo "<tr><td><img  style='width:100%;max-width:100px; max-height:100px;' src='$url'/></td>
+                        <td>".$url."</td></tr>";
+                }
+            }
+            ?>
+            </tbody>
+        </table>
+        </div>
+    </div>
 </div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
